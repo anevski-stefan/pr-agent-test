@@ -18,8 +18,6 @@ jobs:
         uses: the-pr-agent/pr-agent@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          config.model: "openrouter/anthropic/claude-sonnet-4"
-          config.fallback_models: '["openrouter/mistralai/devstral-2512"]'
           OPENROUTER.KEY: ${{ secrets.OPENROUTER_KEY }}
           github_action_config.auto_describe: "true"
           github_action_config.auto_review: "true"

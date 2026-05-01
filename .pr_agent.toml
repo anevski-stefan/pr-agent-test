@@ -1,0 +1,30 @@
+[config]
+model = "openrouter/anthropic/claude-sonnet-4"
+fallback_models = ["openrouter/mistralai/devstral-2512"]
+custom_model_max_tokens = 20000
+
+[pr_reviewer]
+num_max_findings = 8
+require_todo_scan = true
+require_can_be_split_review = true
+extra_instructions = """
+Beyond bugs/security/perf, call out when introduced in this PR:
+- React hooks dependency mistakes (useEffect/useMemo/useCallback) with suggested fixes.
+- Immutability: mutating props/state/arrays/objects.
+- Re-render risks: inline functions/objects as props, missing memoization where clearly beneficial.
+- Async: error handling, cancellation/aborts for effects, promise chains vs async/await clarity.
+- Accessibility for touched UI (roles, labels, keyboard).
+- Any TODO/FIXME/HACK left in changed lines (cite line).
+"""
+
+[pr_code_suggestions]
+num_code_suggestions_per_chunk = 6
+max_number_of_calls = 6
+parallel_calls = true
+suggestions_score_threshold = 0
+focus_only_on_problems = false
+extra_instructions = """
+Include suggestions for: unused vars/imports in diff, hooks exhaustive-deps issues,
+array/object mutations, and replacing document.querySelector with React state/refs.
+Prefer concrete minimal diffs.
+"""
