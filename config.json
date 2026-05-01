@@ -1,0 +1,26 @@
+{
+  "database": {
+    "host": "localhost",
+    "port": 5432,
+    "username": "admin",
+    "password": "secretpassword123",
+    "database_name": "myapp"
+  },
+  "api_keys": {
+    "stripe": "sk_test_1234567890abcdef",
+    "google_maps": "AIzaSyBadKey1234567890",
+    "aws_access_key": "AKIAIOSFODNN7EXAMPLE",
+    "aws_secret_key": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+  },
+  "debug": true,
+  "allowed_hosts": ["*"],
+  "cors_origins": ["https://*.example.com", "http://localhost:*"],
+  "log_level": "DEBUG",
+  "session_secret": "very_insecure_secret_key_here",
+  "email": {
+    "smtp_server": "smtp.gmail.com",
+    "smtp_port": 587,
+    "smtp_username": "myapp@gmail.com",
+    "smtp_password": "emailpassword123"
+  }
+}
