@@ -18,7 +18,8 @@ focus_only_on_problems = false
 [pr_reviewer_agent]
   agent_mode = true
   agent_max_skill_calls = 3
-  agent_max_findings_per_skill = 8
+  agent_max_findings_per_skill = 10
+  agent_min_risk_to_trigger = 1
   agent_review_skills = [                                                                                                                                               
       "frontend-ui-engineering",
       "code-review-and-quality",                                                                                                                                        
