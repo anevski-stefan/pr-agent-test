@@ -1,24 +1,32 @@
 name: PR Agent
-
-on:
-  pull_request:
-    types: [opened, reopened, ready_for_review]
-  issue_comment:
-
-jobs:
+                                                                                                                                                                        
+on:                                                                                                                                                                   
+  pull_request:                                                                                                                                                       
+    types: [opened, reopened, ready_for_review]                                                                                                                       
+  issue_comment:                                                                                                                                                      
+                                                                                                                                                                        
+jobs:                                                                                                                                                                 
   pr_agent_job:
     if: ${{ github.event.sender.type != 'Bot' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest                                                                                                                                            
     permissions:
-      issues: write
+      issues: write                                                                                                                                                   
       pull-requests: write
       contents: write
     steps:
-      - name: PR Agent
-        uses: the-pr-agent/pr-agent@main
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'                                                                                                                                      
+   
+      - name: Install PR Agent                                                                                                                                        
+        run: pip install --quiet git+https://github.com/anevski-stefan/pr-agent.git@main
+
+      - name: Run PR Agent
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OPENROUTER.KEY: ${{ secrets.OPENROUTER_KEY }}
+          OPENROUTER.KEY: ${{ secrets.OPENROUTER_KEY }}                                                                                                               
           github_action_config.auto_describe: "true"
-          github_action_config.auto_review: "true"
-          github_action_config.auto_improve: "true"
+          github_action_config.auto_review: "true"                                                                                                                    
+          github_action_config.auto_improve: "true"                                                                                                                   
+        run: python -m pr_agent.servers.github_action_runner
